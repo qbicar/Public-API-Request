@@ -10,8 +10,14 @@ $.ajax({
         jsonData.forEach(employee => {
             const image = employee.results
             const name = employee.results
-            const email = employee.results
-            const location = employee.results
+            const phone = formatNumber(employee.phone);
+            const date = dOB(employee.dob);
+            const name = `${employee.name.first} > ${employee.name.last}`;
+            const email = `${employee.email}`
+            const location = `${employee.location}`
+
+
+            
         });
         console.log(data);
     }
@@ -34,32 +40,26 @@ const searchBar = [`
                          <input type="search" id="search-input" class="search-input" placeholder="Search...">
                          <input type="submit" value="&#x1F50D;" id="serach-submit" class="search-submit">
                     </form>`]
-const modal = [` 
-                <div class="modal-container">
-                <div class="modal">
-                    <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
-                    <div class="modal-info-container">
-                        <img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">
-                        <h3 id="name" class="modal-name cap">name</h3>
-                        <p class="modal-text">${email}</p>
-                        <p class="modal-text cap">city</p>
-                        <hr>
-                        <p class="modal-text">(555) 555-5555</p>
-                        <p class="modal-text">123 Portland Ave., Portland, OR 97204</p>
-                        <p class="modal-text">Birthday: 10/21/2015</p>
-                    </div>
-                </div>`]
-const myDiv = document.createElement("div")
+
+
 const htmlBody = document.querySelector("body")
-htmlBody.append(myDiv)
-// myDiv.append(modal)
-// myDiv.setAtrribute('class', 'modal-container')
-// $('#gallery').append(template)
+htmlBody.append(`[
+//                 <div class="modal-container">
+//                 <div class="modal">
+//                     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
+//                     <div class="modal-info-container">
+//                         <img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">
+//                         <h3 id="name" class="modal-name cap">name</h3>
+//                         <p class="modal-text">${email}</p>
+//                         <p class="modal-text cap">city</p>
+//                         <hr>
+//                         <p class="modal-text">(555) 555-5555</p>
+//                         <p class="modal-text">123 Portland Ave., Portland, OR 97204</p>
+//                         <p class="modal-text">Birthday: 10/21/2015</p>
+//                     </div>
+//                 </div>`
+
 $('.search-container').append(searchBar)
-
-htmlBody.append(modal)
-
-
 $("#modal-close-btn").click(function () {
     // $.ajax({
     //     url: "demo_test.txt", success: function (result) {
