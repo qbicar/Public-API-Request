@@ -1,4 +1,4 @@
-let jsonData;
+
 
 
 
@@ -8,62 +8,91 @@ $.ajax({
     success: function (data) {
         jsonData = data.results
         jsonData.forEach(employee => {
-            const image = employee.results
-            const name = employee.results
-            const email = employee.results
-            const location = employee.results
+            const image = employee.picture.large
+            const Fname = employee.name.first
+            const Lname = employee.name.last
+            const email = employee.email
+            const city = employee.location.city
+            const state = employee.location.state
+            const template = `
+                <div class="card">
+                    <div class="card-img-container">
+                        <img class="card-img" src="${image}" alt="profile picture">
+                    </div>
+                    <div class="card-info-container">
+                        <h3 id="name" class="card-name cap">${Fname} ${Lname}</h3>
+                        <p class="card-text">${email}</p>
+                        <p class="card-text cap">${city}, ${state}</p>
+                    </div>
+                </div>`
+            $('#gallery').append(template)
         });
-        console.log(data);
     }
 
 });
-
-const template = [`
-                <div class="card">
-                    <div class="card-img-container">
-                        <img class="card-img" src="https://placehold.it/90x90" alt="profile picture">
-                    </div>
-                    <div class="card-info-container">
-                        <h3 id="name" class="card-name cap">first last</h3>
-                        <p class="card-text">${email}</p>
-                        <p class="card-text cap">city, state</p>
-                    </div>
-                </div>`]
-const searchBar = [`
+const searchBar = `
                 <form action="#" method="get">
                          <input type="search" id="search-input" class="search-input" placeholder="Search...">
                          <input type="submit" value="&#x1F50D;" id="serach-submit" class="search-submit">
-                    </form>`]
-const modal = [` 
-                <div class="modal-container">
-                <div class="modal">
-                    <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
-                    <div class="modal-info-container">
-                        <img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">
-                        <h3 id="name" class="modal-name cap">name</h3>
-                        <p class="modal-text">${email}</p>
-                        <p class="modal-text cap">city</p>
-                        <hr>
-                        <p class="modal-text">(555) 555-5555</p>
-                        <p class="modal-text">123 Portland Ave., Portland, OR 97204</p>
-                        <p class="modal-text">Birthday: 10/21/2015</p>
-                    </div>
-                </div>`]
-const myDiv = document.createElement("div")
-const htmlBody = document.querySelector("body")
-htmlBody.append(myDiv)
-// myDiv.append(modal)
-// myDiv.setAtrribute('class', 'modal-container')
-// $('#gallery').append(template)
+                    </form>`
 $('.search-container').append(searchBar)
 
-htmlBody.append(modal)
+//create function funtion for X 
+//and append below
+
+function modalX(x) {
+    const image = jsonData[x].picture.large
+    const Fname = jsonData[x].name.first
+    const Lname = jsonData[x].name.last
+    const email = jsonData[x].email
+    const city = jsonData[x].location.city
+    const phone = jsonData[x].phone
+    const state = jsonData[x].location.state
+    const street = jsonData[x].location.street
+    const zip = jsonData[x].location.postcode
+    let dob = jsonData[x].dob.date
+    dob = dob.slice(5, 7) + "/" + dob.slice(8, 10) + "/" + dob.slice(0, 4)
+    $('body').append(`<div class="modal-container">
+    <div class="modal">
+        <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
+        <div class="modal-info-container">
+            <img class="modal-img" src = "${image}" alt="profile picture">
+                <h3 id="name" class="modal-name cap">${Fname} ${Lname}</h3>
+                <p class="modal-text">${email}</p>
+                <p class="modal-text cap">${city}</p>
+                <hr>
+                    <p class="modal-text">${phone}</p>
+                    <p class="modal-text">${street}, ${city}, ${state}, ${zip}</p>
+                    <p class="modal-text">Birthday:${dob}</p> 
+                    </div>
+                </div>
+                   <div class="modal-btn-container">
+                    <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
+                    <button type="button" id="modal-next" class="modal-next btn">Next</button>
+                </div>
+            </div>`)
+
+    $("#modal-close-btn").click(function () {
+        $('.modal-container').remove()
+    });
+
+//     $("#modal-prev").click(function () {
+//         if (this)
+// })
+}
+
+//click for xtra credit prev //disable if x === 0 
+//click for xtra credi next // disable if x === 12
+//call x function in xtra credit clicks
+
+$("#gallery").on("click", ".card", function () {
+    console.log("monkeykey")
+    x = ($(this).index())
+    modalX(x);
+
+})
 
 
-$("#modal-close-btn").click(function () {
-    // $.ajax({
-    //     url: "demo_test.txt", success: function (result) {
-    //         $("#div1").html(result);
-    //     }
-    // });
-});
+
+//on click for gallery card 
+//call the function for x . 
