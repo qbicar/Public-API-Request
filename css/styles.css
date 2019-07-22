@@ -84,7 +84,7 @@ header h1 {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    cursor: pointer;
+    cursor: url("https://img.icons8.com/small/16/000000/guest-male.png"),auto;
     width: 100%;
     max-width: 360px;
     margin: 10px 10px 20px;
