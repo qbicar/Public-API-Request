@@ -1,5 +1,6 @@
 
 
+
 fetch('https://randomuser.me/api/?results=12&nat=US')            //goes to the website and grabs 12 array results to display and  US employees 
     .then(response => response.json())                          //response will send out a promise and respond with json datatpe
     .then(function (profile) {                                 //then the function profile will execute
@@ -13,6 +14,7 @@ fetch('https://randomuser.me/api/?results=12&nat=US')            //goes to the w
             let state = employee.location.state
             //<=========================set markup to a variable named html ==========================================    
             html = ` <div class="card">                     
+
                     <div class="card-img-container">
                         <img class="card-img" src="${image}" alt="profile picture">
                     </div>
@@ -64,3 +66,4 @@ function modalX(x) {
     x = ($(this).index())                   //the value index of employee which is set to the variable x will
     modalX(x);                             // then call my modal(X) function to display.
 })
+
